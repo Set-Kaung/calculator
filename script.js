@@ -71,7 +71,7 @@ function updateDisplay(state,number){
 }
 
 function getNumber(e){
-    if(recentString.length <= 11){
+    if(recentString.length <= 14){
         let number = e.target.textContent;
         updateDisplay("number",number);
     }
