@@ -46,7 +46,7 @@ body{
     right: 0;
     left: 0;
     bottom: 0;
-    
+    height: 60%;
 }
 
 .numbers{
@@ -94,7 +94,7 @@ body{
 
 .history{
     font-size: 12px;
-    height: 40%;
+    height:40%;
 }
 
 span{
