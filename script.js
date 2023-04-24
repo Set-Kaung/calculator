@@ -71,6 +71,7 @@ function updateDisplay(state,number){
 }
 
 function getNumber(e){
+    recentString = recentString.toString();
     if(recentString.length <= 14){
         let number = e.target.textContent;
         updateDisplay("number",number);
@@ -184,6 +185,7 @@ function allClear(){
         recentString = "";
         historyString = "";
         updateDisplay("clear",null);
+        answerAvailable = false;
     }
 }
 
@@ -193,4 +195,3 @@ operatorsGrid.childNodes.forEach((node)=>{node.addEventListener("click",(e)=>{ge
 equalBtn.addEventListener('click', equalController);
 backSpaceBtn.addEventListener("click", backSpace);
 clearBtn.addEventListener("click", allClear);
-generateNumGrid();
