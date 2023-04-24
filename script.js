@@ -16,13 +16,9 @@ let historyString = "";
 let answerAvailable = false;
 
 
-for(var i =0; i<11;i++){
+for(var i =0; i<10;i++){
     var button = document.createElement("button");
-    if(i == 10){
-        button.textContent = "00";
-    }else{
         button.textContent = `${i}`;
-    }
     button.addEventListener("click",e => {getNumber(e)});
     numbersGrid.appendChild(button);
 }
@@ -40,8 +36,6 @@ operatorsGrid.style.height = `${height}`;
 
 function updateDisplay(state,number){
     if(state === "operation"){
-        temp = parseFloat(recentString);
-        recentString = temp.toString();
         historyString = recentString + operationString;
         recentString ="";
         recent.textContent = recentString;
@@ -80,10 +74,10 @@ function getNumber(e){
 }
 
 function getOperation(e){
-    if(operationString == "" && answerAvailable == false){
+    if(operationString == "" || answerAvailable == false){
         operationString = e.target.textContent;
         updateDisplay("operation",null);
-    }else if(answerAvailable == true){
+    }else if(answerAvailable == true && recentString != ""){
         operationString = e.target.textContent;
         secondNum = null;
         answerAvailable = false;
@@ -94,6 +88,7 @@ function getOperation(e){
 }
 
 function insertDecimal(e){
+    recentString = recentString.toString();
     if (recentString.indexOf('.') === -1) {
         recentString = recentString + ".";
         updateDisplay("decimal",null);
@@ -195,3 +190,5 @@ operatorsGrid.childNodes.forEach((node)=>{node.addEventListener("click",(e)=>{ge
 equalBtn.addEventListener('click', equalController);
 backSpaceBtn.addEventListener("click", backSpace);
 clearBtn.addEventListener("click", allClear);
+
+
