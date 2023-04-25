@@ -82,7 +82,6 @@ function getOperation(e){
         secondNum = null;
         answerAvailable = false;
         updateDisplay("operation",null);
-        getOperation(e);
     }
     
 }
