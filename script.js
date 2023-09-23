@@ -1,13 +1,11 @@
-const decimalRegex = /^\d+(\.\d+)?$/;
-
 let numbersGrid = document.querySelector(".numbers");
-let operatorsGrid = document.querySelector(".operators");
+let operators = document.querySelectorAll(".operator")
 let history = document.querySelector(".history");
 let recent = document.querySelector(".recent");
-let buttons = document.querySelector(".buttons");
 let equalBtn = document.querySelector(".equal");
 let backSpaceBtn = document.querySelector(".backspace");
 let clearBtn = document.querySelector(".clear");
+let decimal = document.querySelector(".decimal");
 
 let operationString = "";
 let secondNum;
@@ -20,19 +18,14 @@ for(var i =0; i<10;i++){
     var button = document.createElement("button");
         button.textContent = `${i}`;
     button.addEventListener("click",e => {getNumber(e)});
+    if (i==9){
+        button.classList.add("nine");
+    }
     numbersGrid.appendChild(button);
 }
 
 
-
-
-let decimal = document.createElement("button");
-decimal.textContent = ".";
 decimal.addEventListener("click",(e)=>{insertDecimal(e)});
-numbersGrid.appendChild(decimal);
-
-let height = numbersGrid.clientHeight;
-operatorsGrid.style.height = `${height}`;
 
 function updateDisplay(state,number){
     if(state === "operation"){
@@ -58,7 +51,7 @@ function updateDisplay(state,number){
     }else if(state == "backspace"){
         recent.textContent = recentString;
         history.textContent = historyString;
-    }else if(state = "clear"){
+    }else if(state == "clear"){
         recent.textContent = recentString;
         history.textContent = historyString; 
     }
@@ -86,7 +79,7 @@ function getOperation(e){
     
 }
 
-function insertDecimal(e){
+function insertDecimal(){
     recentString = recentString.toString();
     if (recentString.indexOf('.') === -1) {
         recentString = recentString + ".";
@@ -95,8 +88,6 @@ function insertDecimal(e){
         return false;
       }
 }
-
-
 
 function getAnswer(operation,recentString,historyString){
     let num1 = parseFloat(historyString);
@@ -151,6 +142,7 @@ function getContinuousAnswer(operation,recentString){
 }
 
 function equalController(){
+    let answer = ""
     if(recentString == "" || historyString == ""){
         alert("Invalid Usage!");
     }else if(answerAvailable == false){
@@ -185,7 +177,7 @@ function allClear(){
 
 
 
-operatorsGrid.childNodes.forEach((node)=>{node.addEventListener("click",(e)=>{getOperation(e)})})
+operators.forEach((node)=>{node.addEventListener("click",(e)=>{getOperation(e)})})
 equalBtn.addEventListener('click', equalController);
 backSpaceBtn.addEventListener("click", backSpace);
 clearBtn.addEventListener("click", allClear);
